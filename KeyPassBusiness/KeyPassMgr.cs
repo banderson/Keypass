@@ -7,7 +7,7 @@ using KeyPassDataAccess;
 
 namespace KeyPassBusiness
 {
-    public static class GroupKeyMgr
+    public static class KeyPassMgr
     {
 
         public static bool AddGroup(Group g)

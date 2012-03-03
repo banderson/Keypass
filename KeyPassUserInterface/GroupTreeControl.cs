@@ -41,7 +41,7 @@ namespace KeyPassUserInterface
 
             Group g = new Group();
             g.GroupName = f.GroupName;
-            GroupKeyMgr.AddGroup(g);
+            KeyPassMgr.AddGroup(g);
 
             var node = _tvwGroups.Nodes.Add(g.GroupName);
             node.Tag = g;
@@ -62,7 +62,7 @@ namespace KeyPassUserInterface
             if (result == DialogResult.Yes)
             {
                 Group currentGroup = (Group)_tvwGroups.SelectedNode.Tag;
-                GroupKeyMgr.DeleteGroup(currentGroup);
+                KeyPassMgr.DeleteGroup(currentGroup);
                 _tvwGroups.SelectedNode.Remove();
             }
 

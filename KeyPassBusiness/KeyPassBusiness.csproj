@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextMgr.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="GroupKeyMgr.cs" />
     <Compile Include="MyCompany.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -33,7 +33,7 @@ namespace KeyPassUserInterface
                     return;
             }
 
-            GroupKeyMgr.AddKeyToGroup(f.Group, f.Key);
+            KeyPassMgr.AddKeyToGroup(f.Group, f.Key);
 
             //UpdateGrid(f.Key);
             ContextMgr.FireGroupSelected();
@@ -50,7 +50,7 @@ namespace KeyPassUserInterface
             }
 
             // save entries
-            GroupKeyMgr.ModifyKey(f.Group, f.Key);
+            KeyPassMgr.ModifyKey(f.Group, f.Key);
 
            // UpdateGrid(f.Key, true);
             ContextMgr.FireGroupSelected();
@@ -66,7 +66,7 @@ namespace KeyPassUserInterface
                     var kk = (ListViewItem)key;
                     Key k = (Key)kk.Tag;
                     _lvwKeys.Items.Remove(kk);
-                    GroupKeyMgr.DeleteKeyFromGroup(ContextMgr.CurrentGroup, k);
+                    KeyPassMgr.DeleteKeyFromGroup(ContextMgr.CurrentGroup, k);
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace KeyPassUserInterface
         void OnGroupSelected(Group g)
         {
             _lvwKeys.Items.Clear();
-            foreach (var key in GroupKeyMgr.GetKeysForGroup(g))
+            foreach (var key in KeyPassMgr.GetKeysForGroup(g))
             {
                 UpdateGrid(key);
             }

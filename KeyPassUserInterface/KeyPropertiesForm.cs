@@ -112,7 +112,7 @@ namespace KeyPassUserInterface
 
         private void OnLoad(object sender, EventArgs e)
         {
-            List<Group> groups = GroupKeyMgr.GetGroups();
+            List<Group> groups = KeyPassMgr.GetGroups();
             _cbxGroups.DataSource = groups;
             _cbxGroups.SelectedItem = ContextMgr.CurrentGroup;
 

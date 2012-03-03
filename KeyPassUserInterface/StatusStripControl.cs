@@ -26,12 +26,12 @@ namespace KeyPassUserInterface
 
         private void UpdateGroupCount()
         {
-            _groupsLabel.Text = "Groups: "+ GroupKeyMgr.GetGroups().Count;
+            _groupsLabel.Text = "Groups: "+ KeyPassMgr.GetGroups().Count;
         }
 
         private void UpdateKeysCount(List<Key> keys)
         {
-            _keysLabel.Text = String.Format("{0} of {1} Keys Selected", keys.Count, GroupKeyMgr.GetKeysForGroup(ContextMgr.CurrentGroup).Count);
+            _keysLabel.Text = String.Format("{0} of {1} Keys Selected", keys.Count, KeyPassMgr.GetKeysForGroup(ContextMgr.CurrentGroup).Count);
         }
     }
 }
