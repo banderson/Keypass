@@ -1,8 +1,0 @@
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\bin\KeyPass.exe
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\bin\KeyPass.pdb
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\KeyPass.Properties.Resources.resources
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\GenerateResource.read.1.tlog
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\KeyPass.exe
-C:\Users\Ben\documents\visual studio 2010\Projects\KeyPass\KeyPass\obj\x86\Debug\KeyPass.pdb
