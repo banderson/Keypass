@@ -42,5 +42,18 @@ namespace KeyPassBusiness
         {
             GroupKeyDataAccessMgr.DeleteKeyFromGroup(g, k);
         }
+
+        public static void ModifyKey(Group group, Key k)
+        {
+            // find the group associated to the key k
+            Group oldGroup = GroupKeyDataAccessMgr.FindGroupForKey(k);
+
+            // if the group is different from the group param, then remove from old group and add to new one
+            if (oldGroup != group)
+            {
+                GroupKeyDataAccessMgr.DeleteKeyFromGroup(oldGroup, k);
+                GroupKeyDataAccessMgr.AddKeyToGroup(group, k);
+            }
+        }
     }
 }

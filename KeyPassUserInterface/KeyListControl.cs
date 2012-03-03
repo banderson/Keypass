@@ -26,41 +26,49 @@ namespace KeyPassUserInterface
                 return;
             }
 
-            KeyPropertiesForm f = new KeyPropertiesForm();
+            KeyPropertiesForm f = new KeyPropertiesForm(ContextMgr.CurrentGroup);
             using (f)
             {
                 if (f.ShowDialog(this) == DialogResult.Cancel)
                     return;
             }
 
-            Key key = SaveForm(f);
+            GroupKeyMgr.AddKeyToGroup(f.Group, f.Key);
 
-            UpdateGrid(key);
+            //UpdateGrid(f.Key);
+            ContextMgr.FireGroupSelected();
         }
 
-        private Key SaveForm(KeyPropertiesForm f)
+        public void OnKeyEdit(object sender, EventArgs e)
         {
-            Key k;
-            if (!f.IsEditMode) 
+            KeyPropertiesForm f = new KeyPropertiesForm(ContextMgr.CurrentGroup, ContextMgr.CurrentKey);
+
+            using (f)
             {
-                k = new Key();
-            } else {
-                k = ContextMgr.CurrentKey;
+                if (f.ShowDialog(this) == DialogResult.Cancel)
+                    return;
             }
 
-            k.Title = f.Title;
-            k.UserName = f.UserName;
-            k.Password = f.Password;
-            k.Notes = f.Notes;
-            k.Url = f.Url;
+            // save entries
+            GroupKeyMgr.ModifyKey(f.Group, f.Key);
 
-            // add key to the collection linked to the group
-            if (!f.IsEditMode) 
+           // UpdateGrid(f.Key, true);
+            ContextMgr.FireGroupSelected();
+        }
+
+        public void OnKeyDelete(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("This will delete all selected Keys. Are you sure?", "Confirm Delete Key(s)", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                GroupKeyMgr.AddKeyToGroup(ContextMgr.CurrentGroup, k);
+                foreach (var key in _lvwKeys.SelectedItems)
+                {
+                    var kk = (ListViewItem)key;
+                    Key k = (Key)kk.Tag;
+                    _lvwKeys.Items.Remove(kk);
+                    GroupKeyMgr.DeleteKeyFromGroup(ContextMgr.CurrentGroup, k);
+                }
             }
-
-            return k;
         }
 
         private void UpdateGrid(Key k, bool editMode = false)
@@ -73,7 +81,9 @@ namespace KeyPassUserInterface
                 lvi.SubItems.Add(k.UserName); // add items to subitems for subsequent column values
                 lvi.SubItems.Add(k.Password);
                 lvi.SubItems.Add(k.Notes);
-            } else {
+            }
+            else
+            {
                 lvi = _lvwKeys.SelectedItems[0];
                 lvi.Text = k.Title;
                 lvi.SubItems[0].Text = k.Title;
@@ -86,25 +96,6 @@ namespace KeyPassUserInterface
 
             // resize the
             _lvwKeys.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
-
-        public void OnKeyEdit(object sender, EventArgs e)
-        {
-            KeyPropertiesForm f = new KeyPropertiesForm();
-            
-            if (ContextMgr.CurrentKey != null)
-                f.IsEditMode = true;
-
-            using (f)
-            {
-                if (f.ShowDialog(this) == DialogResult.Cancel)
-                    return;
-            }
-
-            // save entries
-            Key key = SaveForm(f);
-
-            UpdateGrid(key, true);
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -149,21 +140,6 @@ namespace KeyPassUserInterface
             if (e.IsSelected)
                 ContextMgr.CurrentKey = (Key)e.Item.Tag;
             
-        }
-
-        public void OnDeleteClick(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("This will delete all selected Keys. Are you sure?", "Confirm Delete Key(s)", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                foreach (var key in _lvwKeys.SelectedItems)
-                {
-                    var kk = (ListViewItem)key;
-                    Key k = (Key)kk.Tag;
-                    _lvwKeys.Items.Remove(kk);
-                    GroupKeyMgr.DeleteKeyFromGroup(ContextMgr.CurrentGroup, k);
-                }
-            }
         }
     }
 }

@@ -81,7 +81,7 @@ namespace KeyPassUserInterface
 
         private void OnKeyDeleteMenuClick(object sender, EventArgs e)
         {
-            _lvwKeys.OnDeleteClick(sender, e);
+            _lvwKeys.OnKeyDelete(sender, e);
         }
     }
 }

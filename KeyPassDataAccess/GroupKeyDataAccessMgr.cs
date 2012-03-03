@@ -68,5 +68,17 @@ namespace KeyPassDataAccess
             List<Key> keys = GetKeysForGroup(g);
             keys.Remove(k);
         }
+
+        public static Group FindGroupForKey(Key k)
+        {
+            foreach (var kvp in _groupKeys)
+            {
+                Key key = kvp.Value.Find(item => item == k);
+                if (key != null)
+                    return kvp.Key;
+            }
+
+            return null;        
+        }
     }
 }

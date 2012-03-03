@@ -44,5 +44,10 @@ namespace KeyPassBusiness
 
         // should probably be a property, but a field gets the job done...
         public static bool MultipleKeysSelected = false;
+
+        public static void FireGroupSelected()
+        {
+            GroupSelected.Invoke(_currentGroup);
+        }
     }
 }

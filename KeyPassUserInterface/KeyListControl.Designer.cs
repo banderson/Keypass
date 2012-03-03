@@ -84,7 +84,7 @@
             this._btnDelete.Name = "_btnDelete";
             this._btnDelete.Size = new System.Drawing.Size(36, 36);
             this._btnDelete.Text = "&Save";
-            this._btnDelete.Click += new System.EventHandler(this.OnDeleteClick);
+            this._btnDelete.Click += new System.EventHandler(this.OnKeyDelete);
             // 
             // toolStripSeparator1
             // 

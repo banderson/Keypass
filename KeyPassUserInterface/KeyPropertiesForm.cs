@@ -14,32 +14,56 @@ namespace KeyPassUserInterface
 {
     public partial class KeyPropertiesForm : Form
     {
-        // determines if we should prefill data from currently selected key
-        public bool IsEditMode { get; set; }
+        private Key _key;
+        public Key Key
+        {
+            get { return _key; }
+            set { _key = value; }
+        }
 
-        public string Title { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Url { get; set; }
-        public string Notes { get; set; }
+        private Group _group;
+        public Group Group
+        {
+            get { return _group; }
+            set { _group = value; }
+        }
 
         public KeyPropertiesForm()
         {
             InitializeComponent();
         }
 
+        public KeyPropertiesForm(Group group) 
+            : this()
+        {
+            _group = group;
+        }
+
+        public KeyPropertiesForm(Group group, Key key)
+            : this()
+        {
+            _group = group;
+            _key = key;
+        }
+
         private void OnOK(object sender, EventArgs e)
         {
-            if (ValidateInput())
-            {
-                this.Title = _txtTitle.Text;
-                this.UserName = _txtUsername.Text;
-                this.Notes = _txtComment.Text;
-                this.Password = _txtPassword.Text;
+            if (!ValidateInput())
+                return;
+            
+            if (_key == null)
+                _key = new Key();
 
-                DialogResult = DialogResult.OK;
-                Close();
-            }
+            _key.Title = _txtTitle.Text;
+            _key.UserName = _txtUsername.Text;
+            _key.Notes = _txtComment.Text;
+            _key.Password = _txtPassword.Text;
+
+            _group = (Group)_cbxGroups.SelectedItem;
+
+            DialogResult = DialogResult.OK;
+            Close();
+            
         }
 
         private void OnCancel(object sender, EventArgs e)
@@ -92,21 +116,15 @@ namespace KeyPassUserInterface
             _cbxGroups.DataSource = groups;
             _cbxGroups.SelectedItem = ContextMgr.CurrentGroup;
 
-            if (IsEditMode && ContextMgr.CurrentKey != null)
+            if (_key != null)
             {
-                preFillForm();
+                _txtComment.Text = _key.Notes;
+                _txtPassword.Text = _key.Password;
+                _txtConfirm.Text = _key.Password;
+                _txtTitle.Text = _key.Title;
+                _txtURL.Text = _key.Url;
+                _txtUsername.Text = _key.UserName;
             }
-        }
-
-        private void preFillForm()
-        {
-            Key k = ContextMgr.CurrentKey;
-            _txtComment.Text = k.Notes;
-            _txtPassword.Text = k.Password;
-            _txtConfirm.Text = k.Password;
-            _txtTitle.Text = k.Title;
-            _txtURL.Text = k.Url;
-            _txtUsername.Text = k.UserName;
         }
     }
 }
