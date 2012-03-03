@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C124BE3-11FD-4124-B5C0-DA30BA91A8C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KeyPassUserInterface</RootNamespace>
+    <AssemblyName>KeyPassUserInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClockControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ClockControl.Designer.cs">
+      <DependentUpon>ClockControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupPropertiesForm.Designer.cs">
+      <DependentUpon>GroupPropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupTreeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GroupTreeControl.Designer.cs">
+      <DependentUpon>GroupTreeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeyListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KeyListControl.Designer.cs">
+      <DependentUpon>KeyListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeyPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeyPropertiesForm.Designer.cs">
+      <DependentUpon>KeyPropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StatusStripControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatusStripControl.Designer.cs">
+      <DependentUpon>StatusStripControl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClockControl.resx">
+      <DependentUpon>ClockControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupPropertiesForm.resx">
+      <DependentUpon>GroupPropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupTreeControl.resx">
+      <DependentUpon>GroupTreeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyListControl.resx">
+      <DependentUpon>KeyListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyPropertiesForm.resx">
+      <DependentUpon>KeyPropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatusStripControl.resx">
+      <DependentUpon>StatusStripControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KeyPassBusiness\KeyPassBusiness.csproj">
+      <Project>{9C19EBF3-3221-4CA4-AE30-46B7A4BC48B0}</Project>
+      <Name>KeyPassBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KeyPassInfoModel\KeyPassInfoModel.csproj">
+      <Project>{6238F81B-7A41-4526-9802-81DAF27BB7E6}</Project>
+      <Name>KeyPassInfoModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
