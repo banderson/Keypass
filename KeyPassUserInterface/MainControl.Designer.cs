@@ -77,6 +77,7 @@
             this._lvwKeys = new KeyPassUserInterface.KeyListControl();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this._statusStripControl = new KeyPassUserInterface.StatusStripControl();
+            this._rtbKeyDisplay = new System.Windows.Forms.RichTextBox();
             this._menuStrip.SuspendLayout();
             this._toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerVertical)).BeginInit();
@@ -85,6 +86,7 @@
             this._splitContainerVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerHorizontal)).BeginInit();
             this._splitContainerHorizontal.Panel1.SuspendLayout();
+            this._splitContainerHorizontal.Panel2.SuspendLayout();
             this._splitContainerHorizontal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -482,6 +484,10 @@
             // _splitContainerHorizontal.Panel1
             // 
             this._splitContainerHorizontal.Panel1.Controls.Add(this._lvwKeys);
+            // 
+            // _splitContainerHorizontal.Panel2
+            // 
+            this._splitContainerHorizontal.Panel2.Controls.Add(this._rtbKeyDisplay);
             this._splitContainerHorizontal.Size = new System.Drawing.Size(586, 457);
             this._splitContainerHorizontal.SplitterDistance = 322;
             this._splitContainerHorizontal.TabIndex = 0;
@@ -493,6 +499,7 @@
             this._lvwKeys.Name = "_lvwKeys";
             this._lvwKeys.Size = new System.Drawing.Size(582, 318);
             this._lvwKeys.TabIndex = 0;
+            this._lvwKeys.Load += new System.EventHandler(this.OnLoad);
             // 
             // _statusStripControl
             // 
@@ -502,6 +509,15 @@
             this._statusStripControl.Name = "_statusStripControl";
             this._statusStripControl.Size = new System.Drawing.Size(883, 25);
             this._statusStripControl.TabIndex = 4;
+            // 
+            // _rtbKeyDisplay
+            // 
+            this._rtbKeyDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._rtbKeyDisplay.Location = new System.Drawing.Point(0, 0);
+            this._rtbKeyDisplay.Name = "_rtbKeyDisplay";
+            this._rtbKeyDisplay.Size = new System.Drawing.Size(582, 127);
+            this._rtbKeyDisplay.TabIndex = 0;
+            this._rtbKeyDisplay.Text = "";
             // 
             // MainControl
             // 
@@ -523,6 +539,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerVertical)).EndInit();
             this._splitContainerVertical.ResumeLayout(false);
             this._splitContainerHorizontal.Panel1.ResumeLayout(false);
+            this._splitContainerHorizontal.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerHorizontal)).EndInit();
             this._splitContainerHorizontal.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -580,5 +597,6 @@
         private GroupTreeControl _trvGroups;
         private KeyListControl _lvwKeys;
         private System.Windows.Forms.HelpProvider helpProvider1;
+        private System.Windows.Forms.RichTextBox _rtbKeyDisplay;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using KeyPassBusiness;
+using KeyPassInfoModel;
 
 namespace KeyPassUserInterface
 {
@@ -82,6 +83,19 @@ namespace KeyPassUserInterface
         private void OnKeyDeleteMenuClick(object sender, EventArgs e)
         {
             _lvwKeys.OnKeyDelete(sender, e);
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
+            ContextMgr.KeySelected += ShowKeyDetails;
+        }
+
+        private void ShowKeyDetails(List<Key> keys)
+        {
+            if (keys.Count == 1)
+                _rtbKeyDisplay.Text = keys[0].ToString();
+            else
+                _rtbKeyDisplay.Text = "";
         }
     }
 }
