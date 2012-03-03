@@ -6,10 +6,6 @@ using KeyPassInfoModel;
 
 namespace KeyPassBusiness
 {
-    public delegate void GroupSelectedEventHandler(Group group);
-    public delegate void KeySelectedEventHandler(List<Key> keys);
-    public delegate void GroupAddedEventHandler();
-
     public static class ContextMgr
     {
         public static event GroupSelectedEventHandler GroupSelected = null;
@@ -64,7 +60,7 @@ namespace KeyPassBusiness
         public static void FireGroupAdded()
         {
             if (GroupAdded != null)
-                GroupAdded.Invoke();
+                GroupAdded.Invoke(_currentGroup);
         }
 
         public static void FireKeySelected()

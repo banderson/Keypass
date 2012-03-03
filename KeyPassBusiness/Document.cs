@@ -11,5 +11,10 @@ namespace KeyPassBusiness
         bool IsModified = true;
 
         public List<Group> Groups { get; set; }
+
+        public Document()
+        {
+            Groups = new List<Group>();
+        }
     }
 }

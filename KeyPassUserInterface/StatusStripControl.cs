@@ -24,7 +24,7 @@ namespace KeyPassUserInterface
             ContextMgr.KeySelected += UpdateKeysCount;
         }
 
-        private void UpdateGroupCount()
+        private void UpdateGroupCount(Group group)
         {
             _groupsLabel.Text = "Groups: "+ KeyPassMgr.GetGroups().Count;
         }

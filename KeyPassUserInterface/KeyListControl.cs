@@ -33,7 +33,7 @@ namespace KeyPassUserInterface
                     return;
             }
 
-            KeyPassMgr.AddKeyToGroup(f.Group, f.Key);
+            KeyPassMgr.AddKey(f.Group, f.Key);
 
             //UpdateGrid(f.Key);
             ContextMgr.FireGroupSelected();
@@ -66,7 +66,7 @@ namespace KeyPassUserInterface
                     var kk = (ListViewItem)key;
                     Key k = (Key)kk.Tag;
                     _lvwKeys.Items.Remove(kk);
-                    KeyPassMgr.DeleteKeyFromGroup(ContextMgr.CurrentGroup, k);
+                    KeyPassMgr.DeleteKey(ContextMgr.CurrentGroup, k);
                 }
             }
         }

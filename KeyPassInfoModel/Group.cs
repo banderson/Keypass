@@ -15,5 +15,10 @@ namespace KeyPassInfoModel
         {
             return this.GroupName;
         }
+
+        public Group()
+        {
+            Keys = new List<Key>();
+        }
     }
 }
