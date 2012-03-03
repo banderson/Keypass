@@ -36,29 +36,29 @@
             this._tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // _keysLabel
             // 
             this._keysLabel.AutoSize = true;
             this._keysLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._keysLabel.Location = new System.Drawing.Point(439, 0);
-            this._keysLabel.Name = "label1";
+            this._keysLabel.Name = "_keysLabel";
             this._keysLabel.Size = new System.Drawing.Size(103, 27);
             this._keysLabel.TabIndex = 0;
             this._keysLabel.Text = "X of Y selected keys.";
             this._keysLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // _groupsLabel
             // 
             this._groupsLabel.AutoSize = true;
             this._groupsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._groupsLabel.Location = new System.Drawing.Point(367, 0);
-            this._groupsLabel.Name = "label2";
+            this._groupsLabel.Name = "_groupsLabel";
             this._groupsLabel.Size = new System.Drawing.Size(66, 27);
             this._groupsLabel.TabIndex = 1;
-            this._groupsLabel.Text = "Total Groups";
+            this._groupsLabel.Text = "Groups: 0";
             this._groupsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // _comboBox
             // 
             this._comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this._comboBox.FormattingEnabled = true;
@@ -66,11 +66,11 @@
             this._comboBox.Items.AddRange(new object[] {
             "Test"});
             this._comboBox.Location = new System.Drawing.Point(3, 3);
-            this._comboBox.Name = "comboBox1";
+            this._comboBox.Name = "_comboBox";
             this._comboBox.Size = new System.Drawing.Size(358, 21);
             this._comboBox.TabIndex = 2;
             // 
-            // tableLayoutPanel1
+            // _tableLayoutPanel
             // 
             this._tableLayoutPanel.ColumnCount = 4;
             this._tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -83,20 +83,20 @@
             this._tableLayoutPanel.Controls.Add(this._comboBox, 0, 0);
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this._tableLayoutPanel.Name = "tableLayoutPanel1";
+            this._tableLayoutPanel.Name = "_tableLayoutPanel";
             this._tableLayoutPanel.RowCount = 1;
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._tableLayoutPanel.Size = new System.Drawing.Size(728, 25);
             this._tableLayoutPanel.TabIndex = 3;
             // 
-            // clockControl1
+            // _clock
             // 
             this._clock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this._clock.AutoSize = true;
             this._clock.Location = new System.Drawing.Point(548, 3);
-            this._clock.Name = "clockControl1";
+            this._clock.Name = "_clock";
             this._clock.Size = new System.Drawing.Size(177, 21);
             this._clock.TabIndex = 3;
             // 
@@ -108,6 +108,7 @@
             this.Controls.Add(this._tableLayoutPanel);
             this.Name = "StatusStripControl";
             this.Size = new System.Drawing.Size(728, 25);
+            this.Load += new System.EventHandler(this.OnLoad);
             this._tableLayoutPanel.ResumeLayout(false);
             this._tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);

@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using KeyPassBusiness;
+using KeyPassInfoModel;
 
 namespace KeyPassUserInterface
 {
@@ -14,6 +16,22 @@ namespace KeyPassUserInterface
         public StatusStripControl()
         {
             InitializeComponent();
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
+            ContextMgr.GroupAdded += UpdateGroupCount;
+            ContextMgr.KeySelected += UpdateKeysCount;
+        }
+
+        private void UpdateGroupCount()
+        {
+            _groupsLabel.Text = "Groups: "+ GroupKeyMgr.GetGroups().Count;
+        }
+
+        private void UpdateKeysCount(List<Key> keys)
+        {
+            _keysLabel.Text = String.Format("{0} of {1} Keys Selected", keys.Count, GroupKeyMgr.GetKeysForGroup(ContextMgr.CurrentGroup).Count);
         }
     }
 }

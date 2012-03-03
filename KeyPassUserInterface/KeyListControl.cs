@@ -112,16 +112,7 @@ namespace KeyPassUserInterface
         }
 
         void OnIdle(object sender, EventArgs e)
-        {
-            // this means more than one was selected
-            if (_lvwKeys.SelectedItems.Count > 1)
-                ContextMgr.MultipleKeysSelected = true;
-            else
-                ContextMgr.MultipleKeysSelected = false;
-
-            if (_lvwKeys.SelectedItems.Count == 0)
-                ContextMgr.CurrentKey = null;
-
+        { 
             _btnEdit.Enabled = !(ContextMgr.CurrentKey == null) && !ContextMgr.MultipleKeysSelected;
             _btnDelete.Enabled = !(ContextMgr.CurrentKey == null);
         }
@@ -137,9 +128,14 @@ namespace KeyPassUserInterface
 
         private void OnSelectKey(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (e.IsSelected)
-                ContextMgr.CurrentKey = (Key)e.Item.Tag;
-            
+            ContextMgr.SelectedKeys.Clear();
+
+            foreach (ListViewItem lvi in _lvwKeys.SelectedItems)
+            {
+                ContextMgr.SelectedKeys.Add((Key)lvi.Tag);
+            }
+
+            ContextMgr.FireKeySelected();
         }
     }
 }

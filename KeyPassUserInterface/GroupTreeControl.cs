@@ -46,11 +46,14 @@ namespace KeyPassUserInterface
             var node = _tvwGroups.Nodes.Add(g.GroupName);
             node.Tag = g;
             _tvwGroups.SelectedNode = node;
+
+            ContextMgr.FireGroupAdded();
         }
 
         private void OnGroupSelected(object sender, TreeViewEventArgs e)
         {
             ContextMgr.CurrentGroup = (Group)_tvwGroups.SelectedNode.Tag;
+            ContextMgr.FireGroupSelected();
         }
 
         public void OnGroupDeleteClick(object sender, EventArgs e)
