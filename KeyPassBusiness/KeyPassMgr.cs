@@ -15,8 +15,26 @@ namespace KeyPassBusiness
         public static event KeyAddedEventHandler KeyAdded;
         public static event KeyModifiedEventHandler KeyModified;
         public static event KeyDeletedEventHandler KeyDeleted;
+        public static event DocumentChangedEventHandler DocumentChanged;
+        public static event NewDocumentEventHandler NewDocumentCreated;
 
         private static Document _document = new Document();
+        public static Document Document { get { return _document; } }
+
+        public static void NewDocument()
+        {
+            foreach (var group in _document.Groups)
+            {
+                // this method deletes the keys prior to the group
+                DeleteKeys(group);
+            }
+
+            _document.Groups.Clear();
+
+            _document = new Document();
+
+            FireDocumentNew();
+        }
 
         public static bool AddGroup(Group group)
         {
@@ -27,6 +45,8 @@ namespace KeyPassBusiness
                 GroupAdded.Invoke(group);
             }
 
+            FireDocumentChanged();
+
             return true;
         }
 
@@ -36,6 +56,8 @@ namespace KeyPassBusiness
             {
                 GroupModified.Invoke(group);
             }
+
+            FireDocumentChanged();
 
             return true;
         }
@@ -50,6 +72,8 @@ namespace KeyPassBusiness
             {
                 GroupDeleted.Invoke(group);
             }
+
+            FireDocumentChanged();
 
             return true;
         }
@@ -84,6 +108,8 @@ namespace KeyPassBusiness
                 KeyAdded.Invoke(key);
             }
 
+            FireDocumentChanged();
+
             return true;
         }
 
@@ -98,6 +124,8 @@ namespace KeyPassBusiness
                 DeleteKey(oldGroup, k);
                 AddKey(group, k);
             }
+
+            FireDocumentChanged();
         }
 
         public static void DeleteKey(Group g, Key k)
@@ -108,6 +136,8 @@ namespace KeyPassBusiness
             {
                 KeyDeleted.Invoke(k);
             }
+
+            FireDocumentChanged();
         }
 
         public static void DeleteKeys(Group group)
@@ -121,6 +151,20 @@ namespace KeyPassBusiness
             }
 
             group.Keys.Clear();
+
+            FireDocumentChanged();
+        }
+
+        public static void FireDocumentChanged()
+        {
+            if (DocumentChanged != null)
+                DocumentChanged.Invoke();
+        }
+
+        public static void FireDocumentNew()
+        {
+            if (NewDocumentCreated != null)
+                NewDocumentCreated.Invoke();
         }
     }
 }

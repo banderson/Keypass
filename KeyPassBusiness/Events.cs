@@ -18,4 +18,7 @@ namespace KeyPassBusiness
     public delegate void KeyDeletedEventHandler(Key k);
 
     public delegate void KeysSelectedEventHandler(List<Key> keys);
+
+    public delegate void DocumentChangedEventHandler();
+    public delegate void NewDocumentEventHandler();
 }

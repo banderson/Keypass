@@ -75,9 +75,9 @@
             this._trvGroups = new KeyPassUserInterface.GroupTreeControl();
             this._splitContainerHorizontal = new System.Windows.Forms.SplitContainer();
             this._lvwKeys = new KeyPassUserInterface.KeyListControl();
+            this._rtbKeyDisplay = new System.Windows.Forms.RichTextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this._statusStripControl = new KeyPassUserInterface.StatusStripControl();
-            this._rtbKeyDisplay = new System.Windows.Forms.RichTextBox();
             this._menuStrip.SuspendLayout();
             this._toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerVertical)).BeginInit();
@@ -404,6 +404,7 @@
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Click += new System.EventHandler(this.OnNewDocument);
             // 
             // openToolStripButton
             // 
@@ -501,15 +502,6 @@
             this._lvwKeys.TabIndex = 0;
             this._lvwKeys.Load += new System.EventHandler(this.OnLoad);
             // 
-            // _statusStripControl
-            // 
-            this._statusStripControl.BackColor = System.Drawing.SystemColors.Control;
-            this._statusStripControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._statusStripControl.Location = new System.Drawing.Point(0, 520);
-            this._statusStripControl.Name = "_statusStripControl";
-            this._statusStripControl.Size = new System.Drawing.Size(883, 25);
-            this._statusStripControl.TabIndex = 4;
-            // 
             // _rtbKeyDisplay
             // 
             this._rtbKeyDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -518,6 +510,15 @@
             this._rtbKeyDisplay.Size = new System.Drawing.Size(582, 127);
             this._rtbKeyDisplay.TabIndex = 0;
             this._rtbKeyDisplay.Text = "";
+            // 
+            // _statusStripControl
+            // 
+            this._statusStripControl.BackColor = System.Drawing.SystemColors.Control;
+            this._statusStripControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._statusStripControl.Location = new System.Drawing.Point(0, 520);
+            this._statusStripControl.Name = "_statusStripControl";
+            this._statusStripControl.Size = new System.Drawing.Size(883, 25);
+            this._statusStripControl.TabIndex = 4;
             // 
             // MainControl
             // 

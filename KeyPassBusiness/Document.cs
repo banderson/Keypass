@@ -8,13 +8,19 @@ namespace KeyPassBusiness
 {
     public class Document
     {
-        bool IsModified = true;
+        public bool IsModified = false;
 
         public List<Group> Groups { get; set; }
 
         public Document()
         {
             Groups = new List<Group>();
+            KeyPassMgr.DocumentChanged += HandleDocumentChangeEvent;
+        }
+
+        private void HandleDocumentChangeEvent()
+        {
+            IsModified = true;
         }
     }
 }

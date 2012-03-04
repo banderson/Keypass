@@ -21,6 +21,7 @@ namespace KeyPassUserInterface
         private void OnLoad(object sender, EventArgs e)
         {
             Application.Idle += OnIdle;
+            KeyPassMgr.NewDocumentCreated += RedrawGroups;
         }
 
         // TODO: here's where we would disable non-relevant buttons, etc.
@@ -43,11 +44,16 @@ namespace KeyPassUserInterface
             g.GroupName = f.GroupName;
             KeyPassMgr.AddGroup(g);
 
+            AddGroupNode(g);
+
+            ContextMgr.FireGroupAdded();
+        }
+
+        private void AddGroupNode(Group g)
+        {
             var node = _tvwGroups.Nodes.Add(g.GroupName);
             node.Tag = g;
             _tvwGroups.SelectedNode = node;
-
-            ContextMgr.FireGroupAdded();
         }
 
         private void OnGroupSelected(object sender, TreeViewEventArgs e)
@@ -85,6 +91,19 @@ namespace KeyPassUserInterface
             Group g = ContextMgr.CurrentGroup;
             g.GroupName = f.GroupName;
             _tvwGroups.SelectedNode.Text = f.GroupName;
+        }
+
+        private void RedrawGroups()
+        {
+            _tvwGroups.Nodes.Clear();
+
+            foreach (Group g in KeyPassMgr.GetGroups())
+            {
+                AddGroupNode(g);
+            }
+
+            // this alerts the key list to refresh
+            ContextMgr.FireGroupSelected();
         }
     }
 }

@@ -97,5 +97,13 @@ namespace KeyPassUserInterface
             else
                 _rtbKeyDisplay.Text = "";
         }
+
+        private void OnNewDocument(object sender, EventArgs e)
+        {
+            if (KeyPassMgr.Document.IsModified)
+                MessageBox.Show("You've made changes, would you like to save?");
+
+            KeyPassMgr.NewDocument();
+        }
     }
 }
