@@ -105,5 +105,32 @@ namespace KeyPassUserInterface
 
             KeyPassMgr.NewDocument();
         }
+
+        private void OnSaveClick(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "XML Files|*.xml";
+            dlg.Title = "Save KeyPass Document";
+            
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                KeyPassMgr.SaveDocument(dlg.FileName);
+            }
+
+        }
+
+        private void OnOpenClick(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "XML Files|*.xml";
+            dlg.Title = "Open KeyPass Document";
+
+            // If the file name is not an empty string open it for saving.
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                KeyPassMgr.OpenDocument(dlg.FileName);
+            }
+        }
     }
 }

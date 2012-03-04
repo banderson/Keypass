@@ -22,6 +22,7 @@ namespace KeyPassUserInterface
         {
             Application.Idle += OnIdle;
             KeyPassMgr.NewDocumentCreated += RedrawGroups;
+            KeyPassMgr.DocumentOpened += RedrawGroups;
         }
 
         // TODO: here's where we would disable non-relevant buttons, etc.
@@ -101,9 +102,6 @@ namespace KeyPassUserInterface
             {
                 AddGroupNode(g);
             }
-
-            // this alerts the key list to refresh
-            ContextMgr.FireGroupSelected();
         }
     }
 }

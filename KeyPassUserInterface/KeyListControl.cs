@@ -108,6 +108,8 @@ namespace KeyPassUserInterface
 
             ContextMgr.GroupSelected += OnGroupSelected;
 
+            KeyPassMgr.NewDocumentCreated += OnNewDocument;
+
             Application.Idle += OnIdle;
         }
 
@@ -124,6 +126,11 @@ namespace KeyPassUserInterface
             {
                 UpdateGrid(key);
             }
+        }
+
+        void OnNewDocument()
+        {
+            _lvwKeys.Items.Clear();
         }
 
         private void OnSelectKey(object sender, ListViewItemSelectionChangedEventArgs e)

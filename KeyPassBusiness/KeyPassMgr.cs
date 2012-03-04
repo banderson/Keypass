@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using KeyPassInfoModel;
+using System.IO;
 
 namespace KeyPassBusiness
 {
@@ -17,6 +18,7 @@ namespace KeyPassBusiness
         public static event KeyDeletedEventHandler KeyDeleted;
         public static event DocumentChangedEventHandler DocumentChanged;
         public static event NewDocumentEventHandler NewDocumentCreated;
+        public static event DocumentOpenedEventHandler DocumentOpened;
 
         private static Document _document = new Document();
         public static Document Document { get { return _document; } }
@@ -165,6 +167,42 @@ namespace KeyPassBusiness
         {
             if (NewDocumentCreated != null)
                 NewDocumentCreated.Invoke();
+        }
+
+        public static void FireDocumentOpened()
+        {
+            if (DocumentOpened != null)
+                DocumentOpened.Invoke();
+        }
+
+        public static void SaveDocument(string fileName)
+        {
+            // open up file stream to selected file
+            _document.FilePath = fileName;
+
+            using (var fileStream = new StreamWriter(fileName))
+            {
+                // serialize file to disk
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_document.GetType());
+                x.Serialize(fileStream, _document);
+            }
+
+            // reset the is modified flag
+            _document.IsModified = false;
+        }
+
+        public static void OpenDocument(string fileName)
+        {
+            //TODO: error checking: if no filename exists
+
+            using (var fileStream = new System.IO.FileStream(fileName, FileMode.Open))
+            {
+                // serialize file to disk
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_document.GetType());
+                _document = (Document)x.Deserialize(fileStream);
+            }
+
+            FireDocumentOpened();
         }
     }
 }

@@ -10,6 +10,8 @@ namespace KeyPassBusiness
     {
         public bool IsModified = false;
 
+        public string FilePath;
+
         public List<Group> Groups { get; set; }
 
         public Document()
