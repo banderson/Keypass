@@ -58,6 +58,7 @@ namespace KeyPassUserInterface
             _key.UserName = _txtUsername.Text;
             _key.Notes = _txtComment.Text;
             _key.Password = _txtPassword.Text;
+            _key.Url = _txtURL.Text;
 
             _group = (Group)_cbxGroups.SelectedItem;
 

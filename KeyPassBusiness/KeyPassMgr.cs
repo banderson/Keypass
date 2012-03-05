@@ -23,21 +23,6 @@ namespace KeyPassBusiness
         private static Document _document = new Document();
         public static Document Document { get { return _document; } }
 
-        public static void NewDocument()
-        {
-            foreach (var group in _document.Groups)
-            {
-                // this method deletes the keys prior to the group
-                DeleteKeys(group);
-            }
-
-            _document.Groups.Clear();
-
-            _document = new Document();
-
-            FireDocumentNew();
-        }
-
         public static bool AddGroup(Group group)
         {
             _document.Groups.Add(group);
@@ -173,6 +158,21 @@ namespace KeyPassBusiness
         {
             if (DocumentOpened != null)
                 DocumentOpened.Invoke();
+        }
+
+        public static void NewDocument()
+        {
+            foreach (var group in _document.Groups)
+            {
+                // this method deletes the keys prior to the group
+                DeleteKeys(group);
+            }
+
+            _document.Groups.Clear();
+
+            _document = new Document();
+
+            FireDocumentNew();
         }
 
         public static void SaveDocument(string fileName)

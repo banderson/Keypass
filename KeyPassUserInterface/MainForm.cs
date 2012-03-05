@@ -15,5 +15,16 @@ namespace KeyPassUserInterface
         {
             InitializeComponent();
         }
+
+        //TODO: this should be moved into the maincontrol somehow
+        private void OnLoad(object sender, EventArgs e)
+        {
+            this.FormClosing += OnExit;
+        }
+
+        private void OnExit(Object sender, FormClosingEventArgs e)
+        {
+            _mainControl.OnExit(sender, e);
+        }
     }
 }

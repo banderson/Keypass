@@ -72,11 +72,11 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this._splitContainerVertical = new System.Windows.Forms.SplitContainer();
+            this._trvGroups = new KeyPassUserInterface.GroupTreeControl();
             this._splitContainerHorizontal = new System.Windows.Forms.SplitContainer();
+            this._lvwKeys = new KeyPassUserInterface.KeyListControl();
             this._rtbKeyDisplay = new System.Windows.Forms.RichTextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this._trvGroups = new KeyPassUserInterface.GroupTreeControl();
-            this._lvwKeys = new KeyPassUserInterface.KeyListControl();
             this._statusStripControl = new KeyPassUserInterface.StatusStripControl();
             this._menuStrip.SuspendLayout();
             this._toolStrip.SuspendLayout();
@@ -200,7 +200,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitClick);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExit);
             // 
             // editToolStripMenuItem
             // 
@@ -468,6 +468,14 @@
             this._splitContainerVertical.SplitterDistance = 293;
             this._splitContainerVertical.TabIndex = 5;
             // 
+            // _trvGroups
+            // 
+            this._trvGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._trvGroups.Location = new System.Drawing.Point(0, 0);
+            this._trvGroups.Name = "_trvGroups";
+            this._trvGroups.Size = new System.Drawing.Size(289, 453);
+            this._trvGroups.TabIndex = 0;
+            // 
             // _splitContainerHorizontal
             // 
             this._splitContainerHorizontal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -487,23 +495,6 @@
             this._splitContainerHorizontal.SplitterDistance = 322;
             this._splitContainerHorizontal.TabIndex = 0;
             // 
-            // _rtbKeyDisplay
-            // 
-            this._rtbKeyDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._rtbKeyDisplay.Location = new System.Drawing.Point(0, 0);
-            this._rtbKeyDisplay.Name = "_rtbKeyDisplay";
-            this._rtbKeyDisplay.Size = new System.Drawing.Size(582, 127);
-            this._rtbKeyDisplay.TabIndex = 0;
-            this._rtbKeyDisplay.Text = "";
-            // 
-            // _trvGroups
-            // 
-            this._trvGroups.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._trvGroups.Location = new System.Drawing.Point(0, 0);
-            this._trvGroups.Name = "_trvGroups";
-            this._trvGroups.Size = new System.Drawing.Size(289, 453);
-            this._trvGroups.TabIndex = 0;
-            // 
             // _lvwKeys
             // 
             this._lvwKeys.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -512,6 +503,15 @@
             this._lvwKeys.Size = new System.Drawing.Size(582, 318);
             this._lvwKeys.TabIndex = 0;
             this._lvwKeys.Load += new System.EventHandler(this.OnLoad);
+            // 
+            // _rtbKeyDisplay
+            // 
+            this._rtbKeyDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._rtbKeyDisplay.Location = new System.Drawing.Point(0, 0);
+            this._rtbKeyDisplay.Name = "_rtbKeyDisplay";
+            this._rtbKeyDisplay.Size = new System.Drawing.Size(582, 127);
+            this._rtbKeyDisplay.TabIndex = 0;
+            this._rtbKeyDisplay.Text = "";
             // 
             // _statusStripControl
             // 

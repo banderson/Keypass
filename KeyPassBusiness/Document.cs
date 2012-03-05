@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using KeyPassInfoModel;
+using System.Xml.Serialization;
 
 namespace KeyPassBusiness
 {
     public class Document
     {
+        [XmlIgnore]
         public bool IsModified = false;
 
         public string FilePath;
