@@ -23,6 +23,7 @@ namespace KeyPassUserInterface
             Application.Idle += OnIdle;
             KeyPassMgr.NewDocumentCreated += RedrawGroups;
             KeyPassMgr.DocumentOpened += RedrawGroups;
+            KeyPassMgr.GroupAdded += AddGroupNode;
         }
 
         // TODO: here's where we would disable non-relevant buttons, etc.
@@ -45,8 +46,6 @@ namespace KeyPassUserInterface
             g.GroupName = f.GroupName;
             KeyPassMgr.AddGroup(g);
 
-            AddGroupNode(g);
-
             ContextMgr.FireGroupAdded();
         }
 
@@ -59,8 +58,16 @@ namespace KeyPassUserInterface
 
         private void OnGroupSelected(object sender, TreeViewEventArgs e)
         {
-            ContextMgr.CurrentGroup = (Group)_tvwGroups.SelectedNode.Tag;
-            ContextMgr.FireGroupSelected();
+            SelectGroup();
+        }
+
+        private void SelectGroup()
+        {
+            if (_tvwGroups.SelectedNode != null)
+            {
+                ContextMgr.CurrentGroup = (Group)_tvwGroups.SelectedNode.Tag;
+                ContextMgr.FireGroupSelected();
+            }
         }
 
         public void OnGroupDeleteClick(object sender, EventArgs e)
@@ -104,6 +111,55 @@ namespace KeyPassUserInterface
             {
                 AddGroupNode(g);
             }
+        }
+
+        private void OnGroupMouseDown(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _tvwGroups.SelectedNode = e.Node;
+                _ctxtDeleteGroup.Enabled = _ctxtEditGroup.Enabled = _ctxtAddGroup.Enabled = _ctxtCopy.Enabled = true;
+                _ctxtPaste.Enabled = HasGroupOnClipBoard();
+                _contextMenuStrip.Show(_tvwGroups, e.X, e.Y);
+            }
+        }
+
+        private void OnRightClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _ctxtDeleteGroup.Enabled = _ctxtEditGroup.Enabled = _ctxtCopy.Enabled = _tvwGroups.SelectedNode != null;
+                _ctxtPaste.Enabled = HasGroupOnClipBoard();
+                _contextMenuStrip.Show(_tvwGroups, e.X, e.Y);
+            }
+        }
+
+        private void OnGroupCopy(object sender, EventArgs e)
+        {
+            Group g = ContextMgr.CurrentGroup;
+            DataObject dataObj = new DataObject();
+            dataObj.SetData("KeyPass::Group", g);
+            Clipboard.SetDataObject(dataObj, true);
+        }
+
+        private void OnGroupPaste(object sender, EventArgs e)
+        {
+            // First check if the clipboard contains our custom data
+            IDataObject dataObj = Clipboard.GetDataObject();
+
+            if (HasGroupOnClipBoard())
+            {
+                Group group = dataObj.GetData("KeyPass::Group") as Group;
+                MessageBox.Show(group.GroupName + " has been copied (" + group.Keys.Count + " total keys)");
+
+                // TODO: clone the group object and add to the tree again
+                KeyPassMgr.CloneGroup(group);
+            }
+        }
+
+        private bool HasGroupOnClipBoard()
+        {
+            return Clipboard.GetDataObject().GetDataPresent("KeyPass::Group");
         }
     }
 }

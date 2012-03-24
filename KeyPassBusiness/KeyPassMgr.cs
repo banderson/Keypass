@@ -27,6 +27,22 @@ namespace KeyPassBusiness
         private static Document _document = new Document();
         public static Document Document { get { return _document; } }
 
+        public static void CloneGroup(Group group)
+        {
+            Group clone = null;
+            using (var ms = new MemoryStream())
+            {
+                // serialize group object, then rehydrate as new object graph
+                var bf = new BinaryFormatter();
+                bf.Serialize(ms, group);
+                ms.Position = 0;
+
+                clone = (Group)bf.Deserialize(ms);
+            }
+            
+            KeyPassMgr.AddGroup(clone);
+        }
+
         public static bool AddGroup(Group group)
         {
             _document.Groups.Add(group);
