@@ -22,4 +22,5 @@ namespace KeyPassBusiness
     public delegate void DocumentChangedEventHandler();
     public delegate void NewDocumentEventHandler();
     public delegate void DocumentOpenedEventHandler();
+    public delegate void DocumentSavedEventHandler();
 }

@@ -50,7 +50,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "My Key Pass";
             this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
 

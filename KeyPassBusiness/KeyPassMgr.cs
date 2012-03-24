@@ -17,6 +17,7 @@ namespace KeyPassBusiness
         public static event KeyModifiedEventHandler KeyModified;
         public static event KeyDeletedEventHandler KeyDeleted;
         public static event DocumentChangedEventHandler DocumentChanged;
+        public static event DocumentSavedEventHandler DocumentSaved;
         public static event NewDocumentEventHandler NewDocumentCreated;
         public static event DocumentOpenedEventHandler DocumentOpened;
 
@@ -148,6 +149,12 @@ namespace KeyPassBusiness
                 DocumentChanged.Invoke();
         }
 
+        public static void FireDocumentSaved()
+        {
+            if (DocumentSaved != null)
+                DocumentSaved.Invoke();
+        }
+
         public static void FireDocumentNew()
         {
             if (NewDocumentCreated != null)
@@ -189,6 +196,8 @@ namespace KeyPassBusiness
 
             // reset the is modified flag
             _document.IsModified = false;
+
+            FireDocumentSaved();
         }
 
         public static void OpenDocument(string fileName)
