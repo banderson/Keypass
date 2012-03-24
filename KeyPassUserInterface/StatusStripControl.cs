@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using KeyPassBusiness;
 using KeyPassInfoModel;
+using System.Diagnostics;
 
 namespace KeyPassUserInterface
 {

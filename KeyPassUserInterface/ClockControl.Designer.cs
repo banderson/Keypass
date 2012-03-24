@@ -35,24 +35,25 @@
             this._tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // _clockLabel
             // 
             this._clockLabel.AutoSize = true;
             this._clockLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._clockLabel.Location = new System.Drawing.Point(3, 0);
-            this._clockLabel.Name = "label1";
+            this._clockLabel.Name = "_clockLabel";
             this._clockLabel.Size = new System.Drawing.Size(235, 58);
             this._clockLabel.TabIndex = 0;
             this._clockLabel.Text = "[current date/time]";
             this._clockLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._clockLabel.Click += new System.EventHandler(this.OnClockClick);
             // 
-            // timer1
+            // _timer
             // 
             this._timer.Enabled = true;
             this._timer.Interval = 1000;
             this._timer.Tick += new System.EventHandler(this.OnTimerTick);
             // 
-            // tableLayoutPanel1
+            // _tableLayoutPanel
             // 
             this._tableLayoutPanel.AutoSize = true;
             this._tableLayoutPanel.ColumnCount = 1;
@@ -60,7 +61,7 @@
             this._tableLayoutPanel.Controls.Add(this._clockLabel, 0, 0);
             this._tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
-            this._tableLayoutPanel.Name = "tableLayoutPanel1";
+            this._tableLayoutPanel.Name = "_tableLayoutPanel";
             this._tableLayoutPanel.RowCount = 1;
             this._tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this._tableLayoutPanel.Size = new System.Drawing.Size(241, 58);
