@@ -24,10 +24,10 @@ namespace KeyPassUserInterface
             ContextMgr.GroupAdded += UpdateGroupCount;
             ContextMgr.KeySelected += UpdateKeysCount;
 
+            // Add the audit functionality/callbacks
             KeyPassMgr.GroupAdded += AuditGroupAdded;
             KeyPassMgr.GroupModified += AuditGroupUpdated;
             KeyPassMgr.GroupDeleted += AuditGroupDeleted;
-
             KeyPassMgr.KeyAdded += AuditKeyAdded;
             KeyPassMgr.KeyModified += AuditKeyUpdated;
             KeyPassMgr.KeyDeleted += AuditKeyDeleted;
@@ -65,12 +65,12 @@ namespace KeyPassUserInterface
 
         private void AuditKeyUpdated(Key currentKey)
         {
-            Audit("Key Modified: " + currentKey.ToString());
+            Audit("Modify Key: " + currentKey.ToString());
         }
 
         private void AuditKeyDeleted(Key currentKey)
         {
-            Audit("Key Deleted: " + currentKey.ToString());
+            Audit("Delete Key: " + currentKey.ToString());
         }
 
         private void Audit(string text)
