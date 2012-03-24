@@ -113,6 +113,11 @@ namespace KeyPassBusiness
                 AddKey(group, k);
             }
 
+            if (KeyModified != null)
+            {
+                KeyModified.Invoke(k);
+            }
+
             FireDocumentChanged();
         }
 

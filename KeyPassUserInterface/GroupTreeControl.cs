@@ -92,6 +92,8 @@ namespace KeyPassUserInterface
             Group g = ContextMgr.CurrentGroup;
             g.GroupName = f.GroupName;
             _tvwGroups.SelectedNode.Text = f.GroupName;
+
+            KeyPassMgr.ModifyGroup(g);
         }
 
         private void RedrawGroups()
