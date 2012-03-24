@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using KeyPassInfoModel;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace KeyPassBusiness
 {
@@ -192,11 +193,13 @@ namespace KeyPassBusiness
             // open up file stream to selected file
             _document.FilePath = fileName;
 
-            using (var fileStream = new StreamWriter(fileName))
+            using (var ms = new MemoryStream())
             {
                 // serialize file to disk
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_document.GetType());
-                x.Serialize(fileStream, _document);
+                var bf = new BinaryFormatter();
+                bf.Serialize(ms, _document);
+
+                File.WriteAllBytes(fileName, CryptoHelper.Encrypt(ms.ToArray()));
             }
 
             // reset the is modified flag
@@ -209,11 +212,15 @@ namespace KeyPassBusiness
         {
             //TODO: error checking: if no filename exists
 
-            using (var fileStream = new System.IO.FileStream(fileName, FileMode.Open))
+            using (var ms = new MemoryStream())
             {
-                // serialize file to disk
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_document.GetType());
-                _document = (Document)x.Deserialize(fileStream);
+                // serialize file from disk
+                var input = CryptoHelper.Decrypt(File.ReadAllBytes(fileName));
+                ms.Write(input, 0, input.Length);
+                ms.Position = 0; // move back to beginning of stream
+                
+                var bf = new BinaryFormatter();
+                _document = (Document)bf.Deserialize(ms);
             }
 
             FireDocumentOpened();

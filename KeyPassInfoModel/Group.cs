@@ -5,6 +5,7 @@ using System.Text;
 
 namespace KeyPassInfoModel
 {
+    [Serializable]
     public class Group
     {
         public string GroupName { get; set; }

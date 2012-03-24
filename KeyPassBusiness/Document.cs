@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace KeyPassBusiness
 {
+    [Serializable]
     public class Document
     {
         [XmlIgnore]

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace KeyPassInfoModel
 {
+    [Serializable]
     public class Key
     {
         public string Title { get; set; }
