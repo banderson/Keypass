@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using KeyPassBusiness;
 using KeyPassInfoModel;
+using System.Drawing.Printing;
 
 namespace KeyPassUserInterface
 {
@@ -40,7 +41,7 @@ namespace KeyPassUserInterface
             {
                 KeyPassMgr.OpenDocument(file);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Invalid XML file, please choose a file compatible with this application.");
             }
@@ -158,7 +159,14 @@ namespace KeyPassUserInterface
             // If the file name is not an empty string open it for saving.
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                KeyPassMgr.OpenDocument(dlg.FileName);
+                try
+                {
+                    KeyPassMgr.OpenDocument(dlg.FileName);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Invalid XML file, please choose a file compatible with this application.");
+                }
             }
         }
 
@@ -206,6 +214,29 @@ namespace KeyPassUserInterface
             }
 
             KeyPassMgr.SaveDocument(fileToSave);
+        }
+
+        private void OnPrintClick(object sender, EventArgs e)
+        {
+            PrintDialog dlg = new PrintDialog();
+            dlg.Document = _printDocument;
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+
+            _printDocument.Print();
+        }
+
+        private void OnPrint(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            KeyPassMgr.PrintPage(e);
+            e.HasMorePages = false;
+        }
+
+        private void OnPrintPreview(object sender, EventArgs e)
+        {
+            var f = (Form)_printPreviewDialog;
+            f.WindowState = FormWindowState.Maximized;
+            f.ShowDialog();
         }
     }
 }

@@ -72,11 +72,12 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this._splitContainerVertical = new System.Windows.Forms.SplitContainer();
-            this._trvGroups = new KeyPassUserInterface.GroupTreeControl();
             this._splitContainerHorizontal = new System.Windows.Forms.SplitContainer();
-            this._lvwKeys = new KeyPassUserInterface.KeyListControl();
             this._rtbKeyDisplay = new System.Windows.Forms.RichTextBox();
-            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this._printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this._printDocument = new System.Drawing.Printing.PrintDocument();
+            this._trvGroups = new KeyPassUserInterface.GroupTreeControl();
+            this._lvwKeys = new KeyPassUserInterface.KeyListControl();
             this._statusStripControl = new KeyPassUserInterface.StatusStripControl();
             this._menuStrip.SuspendLayout();
             this._toolStrip.SuspendLayout();
@@ -139,66 +140,72 @@
             this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.OnNewDocument);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenClick);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.OnSaveClick);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.OnSaveClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "Print...";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.OnPrintClick);
             // 
             // printPreviewToolStripMenuItem
             // 
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Preview";
+            this.printPreviewToolStripMenuItem.Click += new System.EventHandler(this.OnPrintPreview);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExit);
             // 
@@ -434,6 +441,7 @@
             this.printToolStripButton.Name = "printToolStripButton";
             this.printToolStripButton.Size = new System.Drawing.Size(36, 36);
             this.printToolStripButton.Text = "&Print";
+            this.printToolStripButton.Click += new System.EventHandler(this.OnPrintClick);
             // 
             // toolStripSeparator6
             // 
@@ -468,14 +476,6 @@
             this._splitContainerVertical.SplitterDistance = 293;
             this._splitContainerVertical.TabIndex = 5;
             // 
-            // _trvGroups
-            // 
-            this._trvGroups.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._trvGroups.Location = new System.Drawing.Point(0, 0);
-            this._trvGroups.Name = "_trvGroups";
-            this._trvGroups.Size = new System.Drawing.Size(289, 453);
-            this._trvGroups.TabIndex = 0;
-            // 
             // _splitContainerHorizontal
             // 
             this._splitContainerHorizontal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -495,15 +495,6 @@
             this._splitContainerHorizontal.SplitterDistance = 322;
             this._splitContainerHorizontal.TabIndex = 0;
             // 
-            // _lvwKeys
-            // 
-            this._lvwKeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._lvwKeys.Location = new System.Drawing.Point(0, 0);
-            this._lvwKeys.Name = "_lvwKeys";
-            this._lvwKeys.Size = new System.Drawing.Size(582, 318);
-            this._lvwKeys.TabIndex = 0;
-            this._lvwKeys.Load += new System.EventHandler(this.OnLoad);
-            // 
             // _rtbKeyDisplay
             // 
             this._rtbKeyDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -512,6 +503,38 @@
             this._rtbKeyDisplay.Size = new System.Drawing.Size(582, 127);
             this._rtbKeyDisplay.TabIndex = 0;
             this._rtbKeyDisplay.Text = "";
+            // 
+            // _printPreviewDialog
+            // 
+            this._printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this._printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this._printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this._printPreviewDialog.Document = this._printDocument;
+            this._printPreviewDialog.Enabled = true;
+            this._printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("_printPreviewDialog.Icon")));
+            this._printPreviewDialog.Name = "_printPreviewDialog";
+            this._printPreviewDialog.Visible = false;
+            // 
+            // _printDocument
+            // 
+            this._printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.OnPrint);
+            // 
+            // _trvGroups
+            // 
+            this._trvGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._trvGroups.Location = new System.Drawing.Point(0, 0);
+            this._trvGroups.Name = "_trvGroups";
+            this._trvGroups.Size = new System.Drawing.Size(289, 453);
+            this._trvGroups.TabIndex = 0;
+            // 
+            // _lvwKeys
+            // 
+            this._lvwKeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._lvwKeys.Location = new System.Drawing.Point(0, 0);
+            this._lvwKeys.Name = "_lvwKeys";
+            this._lvwKeys.Size = new System.Drawing.Size(582, 318);
+            this._lvwKeys.TabIndex = 0;
+            this._lvwKeys.Load += new System.EventHandler(this.OnLoad);
             // 
             // _statusStripControl
             // 
@@ -599,7 +622,8 @@
         private StatusStripControl _statusStripControl;
         private GroupTreeControl _trvGroups;
         private KeyListControl _lvwKeys;
-        private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.RichTextBox _rtbKeyDisplay;
+        private System.Windows.Forms.PrintPreviewDialog _printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument _printDocument;
     }
 }
