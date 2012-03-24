@@ -16,8 +16,35 @@ namespace KeyPassUserInterface
         public MainControl()
         {
             InitializeComponent();
-
+            AllowDrop = true;
+            DragEnter += HandleDragEnter;
+            DragDrop += HandleDragDrop;
             Application.Idle += OnIdle;
+        }
+
+        // Drag events adapted from: http://stackoverflow.com/questions/68598/how-do-i-drag-and-drop-files-into-a-c-sharp-application
+        void HandleDragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+                e.Effect = DragDropEffects.Copy;
+        }
+
+        void HandleDragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            
+            // only handle the first file dragged
+            string file = files[0];
+
+            try
+            {
+                KeyPassMgr.OpenDocument(file);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid XML file, please choose a file compatible with this application.");
+            }
+
         }
 
         public void OnIdle(object sender, EventArgs e)
