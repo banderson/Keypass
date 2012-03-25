@@ -112,6 +112,8 @@
             this._tvwGroups.TabIndex = 1;
             this._tvwGroups.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.OnGroupSelected);
             this._tvwGroups.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.OnGroupMouseDown);
+            this._tvwGroups.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+            this._tvwGroups.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
             this._tvwGroups.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnRightClick);
             // 
             // _imgListIcons
@@ -132,7 +134,7 @@
             this._ctxtCopy,
             this._ctxtPaste});
             this._contextMenuStrip.Name = "_contextMenuStrip";
-            this._contextMenuStrip.Size = new System.Drawing.Size(153, 148);
+            this._contextMenuStrip.Size = new System.Drawing.Size(153, 126);
             // 
             // _ctxtAddGroup
             // 

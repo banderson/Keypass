@@ -43,6 +43,21 @@ namespace KeyPassBusiness
             KeyPassMgr.AddGroup(clone);
         }
 
+        public static void CloneKey(Key key)
+        {
+            Key clone = null;
+            using (var ms = new MemoryStream())
+            {
+                // serialize group object, then rehydrate as new object graph
+                var bf = new BinaryFormatter();
+                bf.Serialize(ms, key);
+                ms.Position = 0;
+                clone = (Key)bf.Deserialize(ms);
+            }
+
+            KeyPassMgr.AddKey(ContextMgr.CurrentGroup, clone);
+        }
+
         public static bool AddGroup(Group group)
         {
             _document.Groups.Add(group);

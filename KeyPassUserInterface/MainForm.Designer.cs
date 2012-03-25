@@ -33,6 +33,7 @@
             // 
             // _mainControl
             // 
+            this._mainControl.AllowDrop = true;
             this._mainControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainControl.Location = new System.Drawing.Point(0, 0);
             this._mainControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

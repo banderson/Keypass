@@ -13,6 +13,8 @@ namespace KeyPassUserInterface
 {
     public partial class KeyListControl : UserControl
     {
+        bool _controlKeyPressed;
+
         public KeyListControl()
         {
             InitializeComponent();
@@ -109,14 +111,14 @@ namespace KeyPassUserInterface
             ContextMgr.GroupSelected += OnGroupSelected;
 
             KeyPassMgr.NewDocumentCreated += OnNewDocument;
-
+            
             Application.Idle += OnIdle;
         }
 
         void OnIdle(object sender, EventArgs e)
         { 
-            _btnEdit.Enabled = !(ContextMgr.CurrentKey == null) && !ContextMgr.MultipleKeysSelected;
-            _btnDelete.Enabled = !(ContextMgr.CurrentKey == null);
+            _btnEdit.Enabled = _ctxtEditKey.Enabled = !(ContextMgr.CurrentKey == null) && !ContextMgr.MultipleKeysSelected;
+            _btnDelete.Enabled = _ctxtDeleteKey.Enabled = _ctxtCopy.Enabled = !(ContextMgr.CurrentKey == null);
         }
 
         void OnGroupSelected(Group g)
@@ -143,6 +145,66 @@ namespace KeyPassUserInterface
             }
 
             ContextMgr.FireKeySelected();
+        }
+
+
+
+        private void OnKeyCopy(object sender, EventArgs e)
+        {
+            List<Key> keys = ContextMgr.SelectedKeys;
+            DataObject dataObj = new DataObject();
+            dataObj.SetData("KeyPass::Keys", keys);
+            Clipboard.SetDataObject(dataObj, true);
+        }
+
+        private void OnKeyPaste(object sender, EventArgs e)
+        {
+            // First check if the clipboard contains our custom data
+            IDataObject dataObj = Clipboard.GetDataObject();
+
+            if (HasKeyOnClipBoard())
+            {
+                List<Key> keys = dataObj.GetData("KeyPass::Keys") as List<Key>;
+                //MessageBox.Show(keys.Count + " keys have been copied");
+
+                // clone the key object and add to the list
+                foreach (var key in keys)
+                {
+                    KeyPassMgr.CloneKey(key);
+                }
+            }
+
+            ContextMgr.FireGroupSelected();
+        }
+
+        private bool HasKeyOnClipBoard()
+        {
+            return Clipboard.GetDataObject().GetDataPresent("KeyPass::Keys");
+        }
+
+        private void OnRightClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _ctxtDeleteKey.Enabled = _ctxtEditKey.Enabled = _ctxtCopy.Enabled = _lvwKeys.SelectedItems.Count > 0;
+                _ctxtPaste.Enabled = HasKeyOnClipBoard();
+                _contextMenuStrip.Show(_lvwKeys, e.X, e.Y);
+            }
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_controlKeyPressed && e.KeyCode == Keys.C && _ctxtCopy.Enabled)
+                OnKeyCopy(sender, e);
+            else if (_controlKeyPressed && e.KeyCode == Keys.V && _ctxtPaste.Enabled)
+                OnKeyPaste(sender, e);
+            else if (e.Control)
+                _controlKeyPressed = true;
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            _controlKeyPressed = false;
         }
     }
 }

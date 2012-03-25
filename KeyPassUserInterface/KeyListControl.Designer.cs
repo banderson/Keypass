@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyListControl));
             this._toolBar = new System.Windows.Forms.ToolStrip();
             this._btnAdd = new System.Windows.Forms.ToolStripButton();
@@ -37,7 +38,15 @@
             this._btnFind = new System.Windows.Forms.ToolStripButton();
             this._txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this._lvwKeys = new System.Windows.Forms.ListView();
+            this._contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this._ctxtAddKey = new System.Windows.Forms.ToolStripMenuItem();
+            this._ctxtEditKey = new System.Windows.Forms.ToolStripMenuItem();
+            this._ctxtDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this._ctxtCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this._ctxtPaste = new System.Windows.Forms.ToolStripMenuItem();
             this._toolBar.SuspendLayout();
+            this._contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // _toolBar
@@ -118,6 +127,63 @@
             this._lvwKeys.UseCompatibleStateImageBehavior = false;
             this._lvwKeys.View = System.Windows.Forms.View.Details;
             this._lvwKeys.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.OnSelectKey);
+            this._lvwKeys.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+            this._lvwKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
+            this._lvwKeys.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnRightClick);
+            // 
+            // _contextMenuStrip
+            // 
+            this._contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._ctxtAddKey,
+            this._ctxtEditKey,
+            this._ctxtDeleteKey,
+            this.toolStripMenuItem1,
+            this._ctxtCopy,
+            this._ctxtPaste});
+            this._contextMenuStrip.Name = "_contextMenuStrip";
+            this._contextMenuStrip.Size = new System.Drawing.Size(147, 120);
+            // 
+            // _ctxtAddKey
+            // 
+            this._ctxtAddKey.Name = "_ctxtAddKey";
+            this._ctxtAddKey.Size = new System.Drawing.Size(152, 22);
+            this._ctxtAddKey.Text = "Add Entry...";
+            this._ctxtAddKey.Click += new System.EventHandler(this.OnKeyAdd);
+            // 
+            // _ctxtEditKey
+            // 
+            this._ctxtEditKey.Name = "_ctxtEditKey";
+            this._ctxtEditKey.Size = new System.Drawing.Size(152, 22);
+            this._ctxtEditKey.Text = "Edit Entry...";
+            this._ctxtEditKey.Click += new System.EventHandler(this.OnKeyEdit);
+            // 
+            // _ctxtDeleteKey
+            // 
+            this._ctxtDeleteKey.Name = "_ctxtDeleteKey";
+            this._ctxtDeleteKey.Size = new System.Drawing.Size(152, 22);
+            this._ctxtDeleteKey.Text = "Delete Entry...";
+            this._ctxtDeleteKey.Click += new System.EventHandler(this.OnKeyDelete);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // _ctxtCopy
+            // 
+            this._ctxtCopy.Name = "_ctxtCopy";
+            this._ctxtCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this._ctxtCopy.Size = new System.Drawing.Size(152, 22);
+            this._ctxtCopy.Text = "Copy";
+            this._ctxtCopy.Click += new System.EventHandler(this.OnKeyCopy);
+            // 
+            // _ctxtPaste
+            // 
+            this._ctxtPaste.Name = "_ctxtPaste";
+            this._ctxtPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this._ctxtPaste.Size = new System.Drawing.Size(152, 22);
+            this._ctxtPaste.Text = "Paste";
+            this._ctxtPaste.Click += new System.EventHandler(this.OnKeyPaste);
             // 
             // KeyListControl
             // 
@@ -130,6 +196,7 @@
             this.Load += new System.EventHandler(this.OnLoad);
             this._toolBar.ResumeLayout(false);
             this._toolBar.PerformLayout();
+            this._contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +212,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton _btnFind;
         private System.Windows.Forms.ToolStripTextBox _txtSearch;
+        private System.Windows.Forms.ContextMenuStrip _contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem _ctxtAddKey;
+        private System.Windows.Forms.ToolStripMenuItem _ctxtEditKey;
+        private System.Windows.Forms.ToolStripMenuItem _ctxtDeleteKey;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem _ctxtCopy;
+        private System.Windows.Forms.ToolStripMenuItem _ctxtPaste;
     }
 }

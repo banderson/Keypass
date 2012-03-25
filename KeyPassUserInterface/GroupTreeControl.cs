@@ -150,7 +150,7 @@ namespace KeyPassUserInterface
             if (HasGroupOnClipBoard())
             {
                 Group group = dataObj.GetData("KeyPass::Group") as Group;
-                MessageBox.Show(group.GroupName + " has been copied (" + group.Keys.Count + " total keys)");
+                //MessageBox.Show(group.GroupName + " has been copied (" + group.Keys.Count + " total keys)");
 
                 // TODO: clone the group object and add to the tree again
                 KeyPassMgr.CloneGroup(group);
@@ -160,6 +160,22 @@ namespace KeyPassUserInterface
         private bool HasGroupOnClipBoard()
         {
             return Clipboard.GetDataObject().GetDataPresent("KeyPass::Group");
+        }
+
+        bool _controlKeyPressed = false;
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_controlKeyPressed && e.KeyCode == Keys.C && _ctxtCopy.Enabled)
+                OnGroupCopy(sender, e);
+            else if (_controlKeyPressed && e.KeyCode == Keys.V && _ctxtPaste.Enabled)
+                OnGroupPaste(sender, e);
+            else if (e.Control)
+                _controlKeyPressed = true;
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            _controlKeyPressed = false;
         }
     }
 }
